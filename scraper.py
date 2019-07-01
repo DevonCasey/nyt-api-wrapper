@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from requests import get
 import json
 import concurrent.futures 
+import os
 
 import pandas as pd 
 from pymongo import MongoClient
@@ -106,9 +107,9 @@ class Scraper(object):
 		pool = concurrent.futures.ThreadPoolExecutor(max_workers=4)
 		page_contents = pool.map(self.scrap_page, web_urls)
 		page_contents = list(page_contents)
-		# for i in range(n_contents):
-		# 	body_text_str = self.scrap_page(web_urls[i])
-		# 	page_contents.append(body_text_str)
+		for i in range(n_contents):
+	 		body_text_str = self.scrap_page(web_urls[i])
+		 	page_contents.append(body_text_str)
 		logger.info('Finish scraping pages')
 		return page_contents 
 
